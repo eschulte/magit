@@ -3002,25 +3002,25 @@ and CLAUSES.
                          (mapconcat 'identity cmd-and-args " "))
                 "\n")
         (cond (nowait
-               (setq magit-process
-                     (let ((process-connection-type
-                            magit-process-connection-type))
-                       (apply 'start-file-process
-                              (file-name-nondirectory cmd)
-                              process-buf cmd args)))
-               (set-process-sentinel
-                magit-process
-                (apply-partially #'magit-process-sentinel command-buf))
-               (set-process-filter magit-process
-                                   (or filter 'magit-process-filter))
-               (when input
-                 (with-current-buffer input
-                   (process-send-region magit-process
-                                        (point-min) (point-max)))
-                 (process-send-eof magit-process)
-                 (sit-for 0.1 t))
-               (magit-display-process magit-process)
-               (setq successp t))
+               (let ((magit-process
+                      (let ((process-connection-type
+                             magit-process-connection-type))
+                        (apply 'start-file-process
+                               (file-name-nondirectory cmd)
+                               process-buf cmd args))))
+                 (set-process-sentinel
+                  magit-process
+                  (apply-partially #'magit-process-sentinel command-buf))
+                 (set-process-filter magit-process
+                                     (or filter 'magit-process-filter))
+                 (when input
+                   (with-current-buffer input
+                     (process-send-region magit-process
+                                          (point-min) (point-max)))
+                   (process-send-eof magit-process)
+                   (sit-for 0.1 t))
+                 (magit-display-process magit-process)
+                 (setq successp t)))
               ((or input filter)
                (with-current-buffer
                    (or input (setq tmp-buf (generate-new-buffer " *temp*")))
