@@ -1,4 +1,7 @@
-[![Build Status](https://travis-ci.org/magit/magit.png?branch=maint,master,next)](https://travis-ci.org/magit/magit)
+Personal magit with added support for;
++ multiple concurrent git processes,
++ customizable command actions and flags (see `magit-command-defaults`)
++ git format-patch action, email patches w/Emacs
 
 It's Magit!  An Emacs mode for Git
 ==================================
