@@ -34,6 +34,11 @@
 </p>
 ***
 
+Personal magit with added support for;
++ multiple concurrent git processes,
++ customizable command actions and flags (see `magit-command-defaults`)
++ git format-patch action, email patches w/Emacs
+
 Support
 =======
 
